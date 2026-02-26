@@ -3,24 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PawGram</title>
+<title>PawGram Intro</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
 :root{
-  /* AMOLED Material */
   --bg:#000000;
-  --surface:#0d0d0d;
-  --surface-2:#141414;
-  --outline:#1f1f1f;
+  --surface:#0f0f0f;
+  --surface-2:#181818;
+  --outline:#242424;
   --primary:#00e5ff;
-  --primary-glow:rgba(0,229,255,0.25);
+  --glow:rgba(0,229,255,0.25);
   --text:#ffffff;
-  --muted:#9aa4ad;
-  --radius:28px;
+  --muted:#a0a8b3;
+  --radius:22px;
 }
 
 *{
@@ -32,143 +30,124 @@
 
 body{
   background:var(--bg);
-  height: 400px;
-  width: 100%;
+  height:400px;
+  width:100%;
   display:flex;
   justify-content:center;
   align-items:center;
+  overflow:hidden;
   color:var(--text);
 }
 
-/* Container */
 .app{
-  width:400px;
-  height:420px;
-  background:var(--surface);
-  border-radius:32px;
-  padding:28px;
+  width:100%;
+  max-width:520px;
+  height:400px;
+  padding:24px;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
-  border:1px solid var(--outline);
-  box-shadow:0 0 60px rgba(0,0,0,.8);
-  animation:fadeIn .6s ease;
+  background:var(--surface);
+  border-top:1px solid var(--outline);
+  border-bottom:1px solid var(--outline);
+  animation:fadeIn .4s ease;
 }
 
-/* Header */
+/* ---------- TOP SECTION ---------- */
+
 .header{
-  display:flex;
-  gap:18px;
-  align-items:center;
+  text-align:center;
+  animation:slideDown .5s ease;
 }
 
-.logo{
-  width:75px;
-  height:75px;
-  border-radius:50%;
-  border:2px solid var(--outline);
-  overflow:hidden;
-  background:var(--surface-2);
-  transition:.3s;
-}
-
-.logo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.logo:hover{
-  border-color:var(--primary);
-  box-shadow:0 0 18px var(--primary-glow);
-}
-
-/* Title */
 .title{
-  font-size:30px;
+  font-size:28px;
   font-weight:900;
   letter-spacing:.5px;
-}
-
-.tagline{
-  font-size:14px;
-  font-weight:600;
-  color:var(--muted);
-  margin-top:4px;
-}
-
-.description{
-  font-size:13px;
-  margin-top:14px;
-  color:var(--muted);
-  line-height:1.6;
-}
-
-/* Download Card */
-.download{
-  background:var(--surface-2);
-  border:1px solid var(--outline);
-  border-radius:24px;
-  padding:20px;
-  text-align:center;
-  transition:.35s;
-  cursor:pointer;
-}
-
-.download:hover{
-  transform:translateY(-6px);
-  border-color:var(--primary);
-  box-shadow:0 0 25px var(--primary-glow);
-}
-
-.version{
-  font-size:24px;
-  font-weight:800;
   background:linear-gradient(90deg,var(--primary),#00bcd4);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
-.download-text{
-  font-size:15px;
-  font-weight:600;
+.tagline{
   margin-top:6px;
+  font-size:14px;
+  font-weight:700;
   color:var(--muted);
 }
 
-/* Info */
-.info{
-  font-size:11px;
+.description{
+  margin-top:16px;
+  font-size:15.5px;
+  font-weight:700;
+  line-height:1.6;
+  color:#d9e3ec;
   text-align:center;
-  color:#6b7680;
-  margin-top:12px;
+  animation:fadeUp .7s ease;
 }
 
-/* Bottom */
+/* ---------- DOWNLOAD CARD ---------- */
+
+.download{
+  margin-top:18px;
+  background:var(--surface-2);
+  border:1px solid var(--outline);
+  border-radius:var(--radius);
+  padding:16px;
+  text-align:center;
+  transition:.3s;
+  cursor:pointer;
+}
+
+.download:hover{
+  border-color:var(--primary);
+  box-shadow:0 0 18px var(--glow);
+  transform:translateY(-3px);
+}
+
+.version{
+  font-size:20px;
+  font-weight:800;
+}
+
+.download-text{
+  margin-top:4px;
+  font-size:13px;
+  font-weight:600;
+  color:var(--muted);
+}
+
+/* ---------- BOTTOM SECTION ---------- */
+
+.bottom{
+  margin-top:18px;
+}
+
 .community-text{
   font-size:13px;
+  font-weight:600;
   text-align:center;
-  margin-bottom:12px;
   color:var(--muted);
-  font-weight:500;
+  margin-bottom:12px;
 }
 
 .links{
   display:flex;
   justify-content:space-between;
+  gap:10px;
 }
 
 .circle{
-  width:64px;
-  height:64px;
-  border-radius:50%;
+  flex:1;
+  height:52px;
+  border-radius:16px;
   background:var(--surface-2);
   border:1px solid var(--outline);
   display:flex;
   align-items:center;
   justify-content:center;
   color:var(--primary);
-  font-size:20px;
+  font-size:18px;
   transition:.3s;
   text-decoration:none;
 }
@@ -176,20 +155,25 @@ body{
 .circle:hover{
   background:var(--primary);
   color:#000;
-  transform:scale(1.1);
-  box-shadow:0 0 20px var(--primary-glow);
+  transform:translateY(-2px);
+  box-shadow:0 0 14px var(--glow);
 }
 
-/* Animations */
+/* ---------- ANIMATIONS ---------- */
+
 @keyframes fadeIn{
-  from{opacity:0;transform:translateY(25px);}
-  to{opacity:1;transform:translateY(0);}
+  from{opacity:0;}
+  to{opacity:1;}
 }
 
-@media(max-width:420px){
-  .app{
-    transform:scale(.92);
-  }
+@keyframes slideDown{
+  from{opacity:0; transform:translateY(-15px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(15px);}
+  to{opacity:1; transform:translateY(0);}
 }
 </style>
 </head>
@@ -198,44 +182,35 @@ body{
 
 <div class="app">
 
-  <!-- Top -->
+  <!-- TOP -->
   <div>
     <div class="header">
-      <div class="logo">
-        <img src="https://raw.githubusercontent.com/thepawdevs/PawGram/refs/heads/main/assets/pawgram_logo.png" alt="PawGram Logo">
-      </div>
-      <div>
-        <div class="title">PawGram</div>
-        <div class="tagline">crafted with 🐾 by PawDevs</div>
+      <div class="title">PawGram</div>
+      <div class="tagline">Instagram Alpha Fork</div>
+
+      <div class="description">
+        PawGram delivers a refined Instagram experience with built-in iOS emojis,
+        optimized runtime performance, and a clean ad-free environment engineered
+        for smooth operation.
       </div>
     </div>
 
-    <div class="description">
-      PawGram is an Instagram Alpha Fork featuring built-in iOS Emojis and an optimized ad-free experience.
-    </div>
-  </div>
-
-  <!-- Download -->
-  <div>
     <a href="https://t.me/pawgramapp" target="_blank" style="text-decoration:none;color:inherit;">
       <div class="download">
         <div class="version">PawGram v11.1</div>
         <div class="download-text">Download Latest Version</div>
       </div>
     </a>
-
-    <div class="info">
-      *If you're using an older version, update from the button above.
-    </div>
   </div>
 
-  <!-- Bottom -->
-  <div>
+  <!-- BOTTOM -->
+  <div class="bottom">
     <div class="community-text">
-      Join PawGram Official Community for updates & resources
+      Official Sources & Community
     </div>
 
     <div class="links">
+
       <a href="https://t.me/pawgramapp" target="_blank" class="circle">
         <i class="fa-brands fa-telegram"></i>
       </a>
@@ -248,9 +223,10 @@ body{
         <i class="fa-brands fa-github"></i>
       </a>
 
-      <a href="https://pawgram-meow.vercel.app/" target="_blank" class="circle">
+      <a href="https://pawgram-meow.vercel.app" target="_blank" class="circle">
         <i class="fa-solid fa-book"></i>
       </a>
+
     </div>
   </div>
 
