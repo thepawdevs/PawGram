@@ -52,7 +52,7 @@ body{
   border-bottom:1px solid var(--outline);
 }
 
-/* ---------- TOP ---------- */
+/* ---------- TOP SECTION ---------- */
 
 .header{
   text-align:center;
@@ -112,7 +112,7 @@ body{
   color:var(--muted);
 }
 
-/* ---------- BOTTOM BUTTONS ---------- */
+/* ---------- BOTTOM SECTION ---------- */
 
 .bottom{
   margin-top:12px;
@@ -127,12 +127,13 @@ body{
 }
 
 .links{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
+  display:flex;
   gap:8px;
+  width:100%;
 }
 
 .circle{
+  flex:1;
   height:48px;
   border-radius:14px;
   background:var(--surface-2);
@@ -144,6 +145,7 @@ body{
   font-size:18px;
   transition:.3s;
   text-decoration:none;
+  min-width:0;
 }
 
 .circle:hover{
@@ -153,18 +155,14 @@ body{
   box-shadow:0 0 12px var(--glow);
 }
 
-/* ---------- RESPONSIVE ---------- */
-
-@media(max-width:480px){
-  .links{
-    grid-template-columns:repeat(2,1fr);
-  }
+/* Subtle entrance animation */
+.app{
+  animation:fadeIn .4s ease;
 }
 
-@media(max-width:320px){
-  .links{
-    grid-template-columns:1fr;
-  }
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1; transform:translateY(0);}
 }
 </style>
 </head>
@@ -180,7 +178,8 @@ body{
       <div class="tagline">Instagram Alpha Fork</div>
 
       <div class="description">
-        PawGram delivers optimized Instagram performance, built-in iOS emojis and a stable ad-free experience.
+        PawGram delivers optimized performance, built-in iOS emojis,
+        and a stable ad-free experience engineered for smooth operation.
       </div>
     </div>
 
@@ -199,6 +198,7 @@ body{
     </div>
 
     <div class="links">
+
       <a href="https://t.me/pawgramapp" target="_blank" class="circle">
         <i class="fa-brands fa-telegram"></i>
       </a>
@@ -214,6 +214,7 @@ body{
       <a href="https://pawgram-meow.vercel.app" target="_blank" class="circle">
         <i class="fa-solid fa-book"></i>
       </a>
+
     </div>
   </div>
 
