@@ -10,15 +10,15 @@
 
 <style>
 :root{
-  --bg:#000000;
+  --bg:#000;
   --surface:#0f0f0f;
   --surface-2:#181818;
-  --outline:#242424;
+  --outline:#252525;
   --primary:#00e5ff;
   --glow:rgba(0,229,255,0.25);
-  --text:#ffffff;
+  --text:#fff;
   --muted:#a0a8b3;
-  --radius:22px;
+  --radius:20px;
 }
 
 *{
@@ -43,57 +43,52 @@ body{
   width:100%;
   max-width:520px;
   height:400px;
-  padding:24px;
+  padding:20px;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
   background:var(--surface);
   border-top:1px solid var(--outline);
   border-bottom:1px solid var(--outline);
-  animation:fadeIn .4s ease;
 }
 
-/* ---------- TOP SECTION ---------- */
+/* ---------- TOP ---------- */
 
 .header{
   text-align:center;
-  animation:slideDown .5s ease;
 }
 
 .title{
-  font-size:28px;
+  font-size:26px;
   font-weight:900;
-  letter-spacing:.5px;
   background:linear-gradient(90deg,var(--primary),#00bcd4);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
 .tagline{
-  margin-top:6px;
   font-size:14px;
   font-weight:700;
+  margin-top:6px;
   color:var(--muted);
 }
 
 .description{
-  margin-top:16px;
-  font-size:15.5px;
+  margin-top:14px;
+  font-size:15px;
   font-weight:700;
-  line-height:1.6;
+  line-height:1.5;
   color:#d9e3ec;
-  text-align:center;
-  animation:fadeUp .7s ease;
 }
 
-/* ---------- DOWNLOAD CARD ---------- */
+/* ---------- UPDATE CARD ---------- */
 
 .download{
-  margin-top:18px;
+  margin-top:16px;
   background:var(--surface-2);
   border:1px solid var(--outline);
   border-radius:var(--radius);
-  padding:16px;
+  padding:14px;
   text-align:center;
   transition:.3s;
   cursor:pointer;
@@ -101,46 +96,45 @@ body{
 
 .download:hover{
   border-color:var(--primary);
-  box-shadow:0 0 18px var(--glow);
-  transform:translateY(-3px);
+  box-shadow:0 0 15px var(--glow);
+  transform:translateY(-2px);
 }
 
 .version{
-  font-size:20px;
+  font-size:18px;
   font-weight:800;
 }
 
 .download-text{
-  margin-top:4px;
   font-size:13px;
+  margin-top:4px;
   font-weight:600;
   color:var(--muted);
 }
 
-/* ---------- BOTTOM SECTION ---------- */
+/* ---------- BOTTOM BUTTONS ---------- */
 
 .bottom{
-  margin-top:18px;
+  margin-top:12px;
 }
 
 .community-text{
-  font-size:13px;
-  font-weight:600;
+  font-size:12px;
   text-align:center;
   color:var(--muted);
-  margin-bottom:12px;
+  margin-bottom:10px;
+  font-weight:600;
 }
 
 .links{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
 }
 
 .circle{
-  flex:1;
-  height:52px;
-  border-radius:16px;
+  height:48px;
+  border-radius:14px;
   background:var(--surface-2);
   border:1px solid var(--outline);
   display:flex;
@@ -156,24 +150,21 @@ body{
   background:var(--primary);
   color:#000;
   transform:translateY(-2px);
-  box-shadow:0 0 14px var(--glow);
+  box-shadow:0 0 12px var(--glow);
 }
 
-/* ---------- ANIMATIONS ---------- */
+/* ---------- RESPONSIVE ---------- */
 
-@keyframes fadeIn{
-  from{opacity:0;}
-  to{opacity:1;}
+@media(max-width:480px){
+  .links{
+    grid-template-columns:repeat(2,1fr);
+  }
 }
 
-@keyframes slideDown{
-  from{opacity:0; transform:translateY(-15px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-@keyframes fadeUp{
-  from{opacity:0; transform:translateY(15px);}
-  to{opacity:1; transform:translateY(0);}
+@media(max-width:320px){
+  .links{
+    grid-template-columns:1fr;
+  }
 }
 </style>
 </head>
@@ -189,15 +180,13 @@ body{
       <div class="tagline">Instagram Alpha Fork</div>
 
       <div class="description">
-        PawGram delivers a refined Instagram experience with built-in iOS emojis,
-        optimized runtime performance, and a clean ad-free environment engineered
-        for smooth operation.
+        PawGram delivers optimized Instagram performance, built-in iOS emojis and a stable ad-free experience.
       </div>
     </div>
 
-    <a href="https://t.me/pawgramapp" target="_blank" style="text-decoration:none;color:inherit;">
+    <a id="downloadLink" target="_blank" style="text-decoration:none;color:inherit;">
       <div class="download">
-        <div class="version">PawGram v12</div>
+        <div class="version" id="versionText">Loading...</div>
         <div class="download-text">Download Latest Version</div>
       </div>
     </a>
@@ -210,7 +199,6 @@ body{
     </div>
 
     <div class="links">
-
       <a href="https://t.me/pawgramapp" target="_blank" class="circle">
         <i class="fa-brands fa-telegram"></i>
       </a>
@@ -226,11 +214,23 @@ body{
       <a href="https://pawgram-meow.vercel.app" target="_blank" class="circle">
         <i class="fa-solid fa-book"></i>
       </a>
-
     </div>
   </div>
 
 </div>
+
+<script>
+fetch("update.json")
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById("versionText").textContent = data.version;
+    document.getElementById("downloadLink").href = data.download_url;
+  })
+  .catch(() => {
+    document.getElementById("versionText").textContent = "PawGram Latest";
+    document.getElementById("downloadLink").href = "https://t.me/pawgramapp";
+  });
+</script>
 
 </body>
 </html>
