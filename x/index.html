@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PawGram X Updater</title>
+
+<style>
+
+body{
+margin:0;
+height:400px;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(160deg,#0b0f14,#101820);
+font-family:system-ui,-apple-system,Segoe UI,Roboto;
+color:white;
+}
+
+/* dialog */
+
+.dialog{
+width:360px;
+height:380px;
+background:#121820;
+border-radius:20px;
+padding:16px;
+box-shadow:0 15px 40px rgba(0,0,0,0.65);
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+text-align:center;
+}
+
+/* title */
+
+.title{
+font-size:24px;
+font-weight:800;
+background:linear-gradient(90deg,#00e5ff,#00bcd4);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.subtitle{
+font-size:13px;
+font-weight:600;
+color:#9aa0a6;
+margin-bottom:4px;
+}
+
+/* version info */
+
+.info{
+font-size:14px;
+font-weight:700;
+margin-bottom:6px;
+}
+
+/* section title */
+
+.section-title{
+font-size:14px;
+font-weight:800;
+margin-top:4px;
+margin-bottom:3px;
+}
+
+/* card containers */
+
+.card{
+background:rgba(0,255,255,0.07);
+border-radius:12px;
+padding:6px 10px;
+margin-bottom:4px;
+}
+
+/* lists */
+
+.card ul{
+margin:0;
+padding-left:16px;
+font-size:13px;
+font-weight:600;
+line-height:1.4;
+text-align:left;
+}
+
+/* buttons */
+
+.buttons{
+display:flex;
+flex-direction:column;
+gap:6px;
+}
+
+button{
+border:none;
+border-radius:10px;
+padding:9px;
+font-size:13px;
+font-weight:700;
+cursor:pointer;
+}
+
+.download{
+background:linear-gradient(135deg,#00e5ff,#0097a7);
+color:white;
+}
+
+.telegram{
+background:#1e2630;
+color:#d0d6dc;
+}
+
+/* footer */
+
+.footer{
+font-size:11px;
+font-weight:600;
+color:#6b7280;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="dialog">
+
+<div>
+
+<div class="title">PawGram X 🐾</div>
+<div class="subtitle">Extended Privacy Build</div>
+
+<div class="info">
+Version: <span id="version">Loading...</span> |
+Updated: <span id="date">Loading...</span>
+</div>
+
+<div class="section-title">Main Features</div>
+
+<div class="card">
+<ul>
+<li>👻 Ghost Mode</li>
+<li>🍎 iOS Emojis</li>
+<li>📥 Download Posts</li>
+<li>🛡 Advanced Privacy</li>
+</ul>
+</div>
+
+<div class="section-title">What's New</div>
+
+<div class="card">
+<ul>
+<li>🐞 Bug Fixed</li>
+<li>📦 Base Update:421.0.0.0.3</li>
+<li>🐾 PawGram Custom Header</li>
+<li>🔧 Unclone Package Build</li>
+<li>⚙ Redesigned Mod Menu</li>
+</ul>
+</div>
+
+</div>
+
+<div>
+
+<div class="buttons">
+
+<button class="download" onclick="downloadAPK()">
+Download Latest
+</button>
+
+<button class="telegram"
+onclick="window.open('https://t.me/pawgramapp','_blank')">
+Join Telegram
+</button>
+
+</div>
+
+<div class="footer">
+Crafted with 🐾 by PawDevs 
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let downloadLink="";
+
+fetch("update.json")
+.then(res=>res.json())
+.then(data=>{
+document.getElementById("version").innerText=data.version;
+document.getElementById("date").innerText=data.updated;
+downloadLink=data.download;
+});
+
+function downloadAPK(){
+window.location.href=downloadLink;
+}
+
+</script>
+
+</body>
+  </html>
