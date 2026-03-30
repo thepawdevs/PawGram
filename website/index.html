@@ -1,357 +1,421 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PawGram – Optimized Instagram Experience</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawGram - The iOS Instagram Experience for Android</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+    <style>
+        /* Material You Dark Monet (Cyan/Teal Base) */
+        :root {
+            --md-sys-color-background: #0f1415;
+            --md-sys-color-surface: #151b1c;
+            --md-sys-color-surface-container: #1d2526;
+            --md-sys-color-surface-variant: #263133;
+            
+            /* Non-Neon Cyan Palette */
+            --md-sys-color-primary: #5ab0b8;
+            --md-sys-color-on-primary: #00363a;
+            --md-sys-color-primary-container: #004f56;
+            --md-sys-color-on-primary-container: #bcebee;
+            
+            --md-sys-color-on-background: #e1e3e4;
+            --md-sys-color-on-surface-variant: #a0a6a7;
+            
+            /* Gradients & Shadows */
+            --cyan-gradient: linear-gradient(135deg, #5ab0b8 0%, #297f87 100%);
+            --cyan-glow: rgba(90, 176, 184, 0.15);
+        }
 
-<style>
-:root{
-  --primary:#00acc1;
-  --on-primary:#002022;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
 
-  --background:#0f1419;
-  --surface:#161c22;
-  --surface-2:#1c232a;
-  --outline:rgba(255,255,255,0.08);
+        body {
+            background-color: var(--md-sys-color-background);
+            color: var(--md-sys-color-on-background);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
 
-  --text:#e6edf3;
-  --muted:#9fb3c8;
+        a {
+            text-decoration: none;
+            color: var(--md-sys-color-on-background);
+            transition: color 0.3s ease;
+        }
 
-  --radius:20px;
-  --transition:0.3s cubic-bezier(.4,0,.2,1);
-}
+        a:hover {
+            color: var(--md-sys-color-primary);
+        }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Inter',sans-serif;
-}
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            background-color: rgba(15, 20, 21, 0.85);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-body{
-  background:var(--background);
-  color:var(--text);
-  scroll-behavior:smooth;
-  overflow-x:hidden;
-}
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
 
-.container{
-  max-width:1200px;
-  margin:auto;
-  padding:clamp(16px,4vw,28px);
-}
+        .logo img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--md-sys-color-surface-container);
+            padding: 2px;
+        }
 
-/* NAVBAR */
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
 
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:14px 22px;
-  background:var(--surface);
-  border-radius:var(--radius);
-  border:1px solid var(--outline);
-  position:sticky;
-  top:20px;
-  z-index:100;
-  flex-wrap:wrap;
-  gap:20px;
-  animation:fadeDown .6s ease;
-}
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
 
-.logo{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  font-weight:700;
-  font-size:18px;
-}
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.85rem 1.8rem;
+            border-radius: 100px; /* Material Pill Shape */
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            border: none;
+            cursor: pointer;
+        }
 
-.logo img{
-  height:34px;
-  width:auto;
-}
+        .btn-primary {
+            background: var(--cyan-gradient);
+            color: var(--md-sys-color-on-primary);
+            box-shadow: 0 4px 12px var(--cyan-glow);
+        }
 
-nav{
-  display:flex;
-  gap:14px;
-  flex-wrap:wrap;
-}
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(90, 176, 184, 0.25);
+            filter: brightness(1.1);
+        }
 
-nav a{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  text-decoration:none;
-  font-size:14px;
-  color:var(--muted);
-  padding:8px 14px;
-  border-radius:999px;
-  transition:var(--transition);
-}
+        .btn-secondary {
+            background-color: var(--md-sys-color-surface-variant);
+            color: var(--md-sys-color-on-background);
+        }
 
-nav a:hover{
-  background:var(--surface-2);
-  color:var(--text);
-}
+        .btn-secondary:hover {
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            transform: translateY(-2px);
+        }
 
-/* HERO */
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 8rem 5% 6rem;
+            max-width: 850px;
+            margin: 0 auto;
+        }
 
-.hero{
-  text-align:center;
-  padding:clamp(80px,12vw,130px) 0;
-  animation:fadeUp 1s ease;
-}
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1.5px;
+        }
 
-.hero h1{
-  font-size:clamp(28px,5vw,44px);
-  font-weight:800;
-  margin-bottom:20px;
-}
+        .hero h1 span {
+            background: var(--cyan-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-.hero p{
-  max-width:750px;
-  margin:auto;
-  font-size:clamp(14px,2.5vw,17px);
-  color:var(--muted);
-  line-height:1.7;
-  padding:0 10px;
-}
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--md-sys-color-on-surface-variant);
+            margin-bottom: 2.5rem;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-.hero-buttons{
-  margin-top:40px;
-  display:flex;
-  justify-content:center;
-  gap:16px;
-  flex-wrap:wrap;
-}
+        /* Features Section */
+        .features {
+            padding: 5rem 5%;
+            background-color: var(--md-sys-color-surface);
+            border-radius: 40px;
+            margin: 0 1rem;
+        }
 
-/* BUTTONS */
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
 
-.btn{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:12px 22px;
-  border-radius:999px;
-  font-weight:600;
-  text-decoration:none;
-  font-size:14px;
-  transition:var(--transition);
-}
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-.btn-primary{
-  background:var(--primary);
-  color:var(--on-primary);
-}
+        .card {
+            background-color: var(--md-sys-color-surface-container);
+            padding: 2.5rem 2rem;
+            border-radius: 28px; /* Material 3 large radius */
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
 
-.btn-outline{
-  border:1px solid var(--outline);
-  color:var(--text);
-}
+        .card:hover {
+            transform: translateY(-6px);
+            background-color: var(--md-sys-color-surface-variant);
+        }
 
-.btn:hover{
-  transform:translateY(-3px);
-}
+        .card-icon {
+            font-size: 1.5rem;
+            color: var(--md-sys-color-primary);
+            background-color: var(--md-sys-color-primary-container);
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
 
-/* SECTIONS */
+        .card:hover .card-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
 
-section{
-  margin-top:clamp(60px,10vw,100px);
-}
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
 
-.section-title{
-  font-size:clamp(20px,3vw,24px);
-  font-weight:700;
-  margin-bottom:40px;
-  text-align:center;
-}
+        .card p {
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:28px;
-}
+        /* Community Banner */
+        .community {
+            text-align: center;
+            padding: 7rem 5%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-.card{
-  background:var(--surface);
-  padding:26px;
-  border-radius:var(--radius);
-  border:1px solid var(--outline);
-  transition:var(--transition);
-  animation:fadeUp .8s ease;
-}
+        .community h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
 
-.card:hover{
-  background:var(--surface-2);
-  transform:translateY(-6px);
-}
+        .community p {
+            color: var(--md-sys-color-on-surface-variant);
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
 
-.card .material-symbols-rounded{
-  font-size:30px;
-  color:var(--primary);
-  margin-bottom:14px;
-}
+        /* Footer */
+        footer {
+            padding: 3rem 5%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            text-align: center;
+        }
 
-.card h3{
-  font-size:16px;
-  margin-bottom:10px;
-}
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            width: 100%;
+        }
 
-.card p{
-  font-size:14px;
-  color:var(--muted);
-  line-height:1.6;
-}
+        .footer-copy {
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: 0.85rem;
+            max-width: 600px;
+        }
 
-/* FOOTER */
+        /* Scroll Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                        transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
 
-footer{
-  margin-top:100px;
-  padding:50px 20px;
-  text-align:center;
-  font-size:13px;
-  color:var(--muted);
-  border-top:1px solid var(--outline);
-}
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-footer strong{
-  color:var(--text);
-}
-
-/* ANIMATIONS */
-
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(25px);}
-  to{opacity:1;transform:translateY(0);}
-}
-
-@keyframes fadeDown{
-  from{opacity:0;transform:translateY(-20px);}
-  to{opacity:1;transform:translateY(0);}
-}
-
-/* MOBILE FIX */
-
-@media(max-width:600px){
-  header{
-    flex-direction:column;
-    align-items:center;
-  }
-  nav{
-    justify-content:center;
-  }
-}
-</style>
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.8rem; }
+            .features { margin: 0; border-radius: 24px; padding: 4rem 5%; }
+            .btn-group { flex-direction: column; }
+            .btn { width: 100%; justify-content: center; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
+    <nav>
+        <div class="logo">
+            <img src="https://raw.githubusercontent.com/thepawdevs/PawGram/refs/heads/main/assets/pawgram_circle.png" alt="PawGram Logo">
+            PawGram
+        </div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#community">Community</a>
+            <a href="https://t.me/pawgramapp" target="_blank"><i class="fa-brands fa-telegram"></i> Channel</a>
+        </div>
+    </nav>
 
-<header>
-  <div class="logo">
-    <img src="https://raw.githubusercontent.com/thepawdevs/PawGram/refs/heads/main/assets/pawgram_circle.png" alt="PawGram Logo">
-    PawGram
-  </div>
+    <header class="hero fade-up">
+        <h1>The iOS Instagram Experience. <span>Built for Android.</span></h1>
+        <p>Elevate your social feed. PawGram is a performance-first client bringing refined aesthetics, buttery-smooth animations, and native rendering right to your Android device.</p>
+        <div class="btn-group">
+            <a href="https://t.me/pawgramapp" target="_blank" class="btn btn-primary">
+                <i class="fa-solid fa-download"></i> Get Latest Release
+            </a>
+            <a href="https://github.com/thepawdevs/PawGram" target="_blank" class="btn btn-secondary">
+                <i class="fa-brands fa-github"></i> View Source
+            </a>
+        </div>
+    </header>
 
-  <nav>
-    <a href="#features"><span class="material-symbols-rounded">grid_view</span>Features</a>
-    <a href="#download"><span class="material-symbols-rounded">download</span>Download</a>
-    <a href="#sources"><span class="material-symbols-rounded">link</span>Sources</a>
-  </nav>
-</header>
+    <section id="features" class="features">
+        <h2 class="section-title fade-up">Why choose PawGram?</h2>
+        <div class="grid">
+            <div class="card fade-up" style="transition-delay: 0.1s;">
+                <div class="card-icon"><i class="fa-solid fa-palette"></i></div>
+                <h3>Refined Aesthetics</h3>
+                <p>Enjoy the premium look and feel of iOS, optimized beautifully and cleanly for your Android screen.</p>
+            </div>
+            <div class="card fade-up" style="transition-delay: 0.2s;">
+                <div class="card-icon"><i class="fa-solid fa-bolt"></i></div>
+                <h3>Lightning Fast</h3>
+                <p>Rewritten resource handling means smoother scrolling, faster loading, and zero lag when browsing your feed.</p>
+            </div>
+            <div class="card fade-up" style="transition-delay: 0.3s;">
+                <div class="card-icon"><i class="fa-solid fa-face-smile"></i></div>
+                <h3>Native iOS Emojis</h3>
+                <p>Express yourself exactly how you want. Built-in rendering ensures your emojis look perfectly consistent.</p>
+            </div>
+            <div class="card fade-up" style="transition-delay: 0.4s;">
+                <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3>Rock-Solid Stability</h3>
+                <p>Say goodbye to unexpected crashes. Under-the-hood adjustments provide a seamless daily experience.</p>
+            </div>
+            <div class="card fade-up" style="transition-delay: 0.5s;">
+                <div class="card-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+                <h3>Universal Compatibility</h3>
+                <p>Engineered to run flawlessly on both legacy and modern hardware, supporting 32-bit & 64-bit architectures.</p>
+            </div>
+            <div class="card fade-up" style="transition-delay: 0.6s;">
+                <div class="card-icon"><i class="fa-solid fa-rotate"></i></div>
+                <h3>Community-Driven</h3>
+                <p>Continuous updates and improvements guided directly by active community feedback and testing.</p>
+            </div>
+        </div>
+    </section>
 
-<section class="hero">
-  <h1>Optimized Instagram Experience</h1>
-  <p>
-    PawGram is a performance-focused Instagram client engineered to deliver improved responsiveness, enhanced operational stability, and consistent built-in emoji rendering.
-    Designed for both legacy and modern Android architectures (32-bit & 64-bit),
-    PawGram emphasizes efficiency, reliability, and structured community-driven development.
-  </p>
+    <section id="community" class="community fade-up">
+        <h2>Driven by the Community. Crafted by PawDevs.</h2>
+        <p>PawGram is constantly evolving based on user feedback. Join the conversation, report bugs, or suggest features directly in our developer group.</p>
+        <a href="https://t.me/pawgramapp" target="_blank" class="btn btn-primary">
+            <i class="fa-brands fa-telegram"></i> Join the Community
+        </a>
+    </section>
 
-  <div class="hero-buttons">
-    <a href="https://t.me/pawgramapp" target="_blank" class="btn btn-primary">
-      <span class="material-symbols-rounded">download</span>
-      Get Latest Release
-    </a>
-    <a href="https://github.com/thepawdevs/PawGram" target="_blank" class="btn btn-outline">
-      <span class="material-symbols-rounded">code</span>
-      View Source
-    </a>
-  </div>
-</section>
+    <footer class="fade-up">
+        <div class="footer-links">
+            <a href="https://thepawdevs.github.io/thepawdevs/" target="_blank" class="btn btn-secondary">
+                <i class="fa-solid fa-globe"></i> PawDevs Official Site
+            </a>
+            <a href="https://github.com/thepawdevs/PawGram" target="_blank" class="btn btn-secondary">
+                <i class="fa-brands fa-github"></i> GitHub Repository
+            </a>
+            <a href="https://t.me/PawDevs" target="_blank" class="btn btn-secondary">
+                <i class="fa-brands fa-telegram"></i> Developer Group
+            </a>
+        </div>
+        <div class="footer-copy">
+            <p>Crafted with 🐾 by PawDevs.</p>
+            <p style="margin-top: 10px; font-size: 0.75rem; opacity: 0.6;">© 2026 PawDevs. PawGram is an independent community project and is not affiliated with Instagram or Meta Platforms, Inc.</p>
+        </div>
+    </footer>
 
-<section id="features">
-  <h2 class="section-title">Core Capabilities</h2>
-  <div class="grid">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
 
-    <div class="card">
-      <span class="material-symbols-rounded">speed</span>
-      <h3>Performance Optimization</h3>
-      <p>Refined resource handling ensures smoother scrolling, faster content loading, and improved runtime efficiency.</p>
-    </div>
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, observerOptions);
 
-    <div class="card">
-      <span class="material-symbols-rounded">verified</span>
-      <h3>Operational Stability</h3>
-      <p>Enhanced internal adjustments reduce unexpected interruptions and improve overall reliability.</p>
-    </div>
-
-    <div class="card">
-      <span class="material-symbols-rounded">emoji_emotions</span>
-      <h3>Integrated Emoji Rendering</h3>
-      <p>Native emoji asset integration provides consistent visual expression across supported Android versions.</p>
-    </div>
-
-    <div class="card">
-      <span class="material-symbols-rounded">devices</span>
-      <h3>Broad Device Compatibility</h3>
-      <p>Maintains compatibility across both legacy hardware and modern Android configurations.</p>
-    </div>
-
-    <div class="card">
-      <span class="material-symbols-rounded">update</span>
-      <h3>Community-Driven Updates</h3>
-      <p>Continuous improvements guided by active community feedback and structured testing cycles.</p>
-    </div>
-
-  </div>
-</section>
-
-<section id="download">
-  <h2 class="section-title">Download & Releases</h2>
-  <div class="hero-buttons">
-    <a href="https://t.me/pawgramapp" target="_blank" class="btn btn-primary">
-      <span class="material-symbols-rounded">campaign</span>
-      Telegram Community & Releases
-    </a>
-  </div>
-</section>
-
-<section id="sources">
-  <h2 class="section-title">Official Sources</h2>
-  <div class="hero-buttons">
-    <a href="https://github.com/thepawdevs/PawGram" target="_blank" class="btn btn-outline">
-      <span class="material-symbols-rounded">code</span>
-      GitHub Repository
-    </a>
-    <a href="https://t.me/PawDevs" target="_blank" class="btn btn-outline">
-      <span class="material-symbols-rounded">group</span>
-      Developer – PawDevs
-    </a>
-  </div>
-</section>
-
-<footer>
-  <strong>© 2026 PawGram</strong><br><br>
-  PawGram is an independent community project and is not affiliated with Instagram or Meta Platforms, Inc.
-</footer>
-
-</div>
-
+            document.querySelectorAll('.fade-up').forEach((element) => {
+                observer.observe(element);
+            });
+        });
+    </script>
 </body>
 </html>
