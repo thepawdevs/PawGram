@@ -1,11 +1,11 @@
 {
   "Update": {
     "Show": true,
-    "ForceUpdate": false,
+    "ForceUpdate": true,
     "Version": "v18",
     "Changelog": "What's New:\n\n• Bugs Fixed\n• Base Updated to 426.0.0.0.49\n• Ui Minor Improvements",
     "GithubLink": "https://github.com/thepawdevs/PawGram",
-    "UpdateLink": "https://t.me/PawGramReleases"
+    "UpdateLink": "https://t.me/pawgramapp/200"
   },
   "Welcome": {
     "Show": true,
